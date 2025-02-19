@@ -7,6 +7,12 @@ namespace App\Domain\User;
 interface UserRepository
 {
     /**
+     * @param array<string, string> $body
+     * @return User
+     */
+    public function create(array $body): User;
+
+    /**
      * @return User[]
      */
     public function findAll(): array;
