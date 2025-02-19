@@ -17,7 +17,7 @@ class Migration
             $table->string('state');
             $table->string('street');
             $table->string('street_number');
-            $table->string('zipcode');
+            $table->string('zip_code');
             $table->timestamps();
         });
     }

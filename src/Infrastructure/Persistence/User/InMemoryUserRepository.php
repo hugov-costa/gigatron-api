@@ -11,30 +11,11 @@ use App\Domain\User\UserRepository;
 class InMemoryUserRepository implements UserRepository
 {
     /**
-     * @var User[]
-     */
-    private array $users;
-
-    /**
-     * @param User[]|null $users
-     */
-    public function __construct(array $users = null)
-    {
-        $this->users = $users ?? [
-            1 => new User(1, 'bill.gates', 'Bill', 'Gates'),
-            2 => new User(2, 'steve.jobs', 'Steve', 'Jobs'),
-            3 => new User(3, 'mark.zuckerberg', 'Mark', 'Zuckerberg'),
-            4 => new User(4, 'evan.spiegel', 'Evan', 'Spiegel'),
-            5 => new User(5, 'jack.dorsey', 'Jack', 'Dorsey'),
-        ];
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function findAll(): array
     {
-        return array_values($this->users);
+        return User::all()->toArray();
     }
 
     /**
@@ -42,10 +23,12 @@ class InMemoryUserRepository implements UserRepository
      */
     public function findUserOfId(int $id): User
     {
-        if (!isset($this->users[$id])) {
+        $user = User::where('id', $id)->first();
+        
+        if (! $user) {
             throw new UserNotFoundException();
         }
 
-        return $this->users[$id];
+        return $user;
     }
 }
