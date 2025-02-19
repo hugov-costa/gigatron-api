@@ -4,13 +4,18 @@ volumes:
 
 services:
     slim:
-        image: php:8.3-alpine
+        image: php:8.3-fpm-alpine
         working_dir: /var/www
         depends_on:
             - mysql
-        command: php -S 0.0.0.0:8080 -t public
+        command: >
+            sh -c "docker-php-ext-install pdo pdo_mysql && php -S 0.0.0.0:8080 -t public"
         environment:
             docker: "true"
+            DB_HOST: mysql
+            DB_DATABASE: slim
+            DB_USERNAME: slim
+            DB_PASSWORD: slim
         ports:
             - "8080:8080"
         volumes:

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/vendor/autoload.php';
-
 namespace App\Application\Actions\User;
+
+require dirname(__DIR__, 4) . '/app/database.php';
 
 use App\Application\Actions\Action;
 use App\Domain\User\UserRepository;
@@ -16,7 +16,6 @@ abstract class UserAction extends Action
 
     public function __construct(LoggerInterface $logger, UserRepository $userRepository)
     {
-        die($userRepository);
         parent::__construct($logger);
         $this->userRepository = $userRepository;
     }
