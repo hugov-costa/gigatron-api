@@ -15,16 +15,7 @@ class InMemoryUserRepository implements UserRepository
      */
     public function create(array $body): User
     {
-        return User::create([
-            'city' => $body['city'],
-            'email' => $body['email'],
-            'name' => $body['name'],
-            'phone' => $body['phone'],
-            'state' => $body['state'],
-            'street' => $body['street'],
-            'street_number' => $body['street_number'],
-            'zip_code' => $body['zip_code'],
-        ]);
+        return User::create($body);
     }
 
     /**
@@ -45,6 +36,18 @@ class InMemoryUserRepository implements UserRepository
         if (! $user) {
             throw new UserNotFoundException();
         }
+
+        return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(int $id, array $body): User
+    {
+        $user = $this->findUserOfId($id);
+
+        $user->fill($body)->save();
 
         return $user;
     }

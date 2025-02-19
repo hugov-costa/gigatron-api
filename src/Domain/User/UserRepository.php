@@ -23,4 +23,11 @@ interface UserRepository
      * @throws UserNotFoundException
      */
     public function findUserOfId(int $id): User;
+
+    /**
+     * @param int $id
+     * @param array<string, string> $body
+     * @return User
+     */
+    public function update(int $id, array $body): User;
 }
