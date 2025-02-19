@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Application\Actions\User\CreateUserAction;
 use App\Application\Actions\User\ListUsersAction;
+use App\Application\Actions\User\RemoveUserAction;
 use App\Application\Actions\User\UpdateUserAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -27,5 +28,6 @@ return function (App $app) {
         $group->get('/{id}', ViewUserAction::class);
         $group->post('', CreateUserAction::class);
         $group->put('/{id}', UpdateUserAction::class);
+        $group->delete('/{id}', RemoveUserAction::class);
     });
 };

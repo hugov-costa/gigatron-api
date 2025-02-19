@@ -13,6 +13,12 @@ interface UserRepository
     public function create(array $body): User;
 
     /**
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool;
+
+    /**
      * @return User[]
      */
     public function findAll(): array;

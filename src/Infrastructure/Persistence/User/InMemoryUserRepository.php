@@ -21,6 +21,14 @@ class InMemoryUserRepository implements UserRepository
     /**
      * {@inheritdoc}
      */
+    public function delete(int $id): bool
+    {
+        return $this->findUserOfId($id)->delete();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findAll(): array
     {
         return User::all()->toArray();
