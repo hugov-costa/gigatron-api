@@ -1,42 +1,32 @@
-# Slim Framework 4 Skeleton Application
+## Simple CRUD API as a test for Gigatron
+This is simple CRUD API for users. There is a middleware forcing request bodies to be application/json and there is also a JWT authentication middleware, which is used only to limit a test route (home).
+It was made using Docker.
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
+## Install dependencies and run application
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
+- Install Docker;
+- Set the .env;
+- Run the following commands to install dependencies:
+    ```
+    docker build -t image-name . --no-cache
+    docker run --rm -v $(pwd):/var/www/html image-name
+    ```
+- If necessary, grant permissions to your user:
+    ```
+    sudo chown -R $(whoami):$(whoami) .
+    ```
+- Run the following command to build (built only once) and run the application:
+    ```
+    docker compose up -d
+    ```
+- Migrate the database tables:
+    ```
+    docker compose exec slim sh
+    php database/migrate.php
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
-
-## Install the Application
-
-Run this command from the directory in which you want to install your new Slim Framework application. You will require PHP 7.4 or newer.
-
-```bash
-composer create-project slim/slim-skeleton [my-app-name]
-```
-
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
-
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
-
-To run the application in development, you can run these commands 
-
-```bash
-cd [my-app-name]
-composer start
-```
-
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
-```bash
-cd [my-app-name]
-docker-compose up -d
-```
-After that, open `http://localhost:8080` in your browser.
-
-Run this command in the application directory to run the test suite
-
-```bash
-composer test
-```
-
-That's it! Now go build something cool.
+    ```
+- To rollback migrations:
+    ```
+    docker compose exec slim sh
+    php database/migrate.php rollback
+    ```
