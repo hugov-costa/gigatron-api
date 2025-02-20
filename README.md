@@ -9,7 +9,7 @@ It was made using Docker.
 - Run the following commands to install dependencies:
     ```
     docker build -t image-name . --no-cache
-    docker run --rm -v $(pwd):/var/www/html image-name
+    docker run --rm -v $(pwd):/var/www/html image-name composer install
     ```
 - If necessary, grant permissions to your user:
     ```
