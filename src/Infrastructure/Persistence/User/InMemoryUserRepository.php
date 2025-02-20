@@ -37,6 +37,20 @@ class InMemoryUserRepository implements UserRepository
     /**
      * {@inheritdoc}
      */
+    public function findUserOfEmail(string $email): User
+    {
+        $user = User::where('email', $email)->first();
+        
+        if (! $user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findUserOfId(int $id): User
     {
         $user = User::where('id', $id)->first();

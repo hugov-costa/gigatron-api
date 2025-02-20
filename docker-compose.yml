@@ -12,10 +12,12 @@ services:
             sh -c "docker-php-ext-install pdo pdo_mysql && php -S 0.0.0.0:8080 -t public"
         environment:
             docker: "true"
-            DB_HOST: mysql
-            DB_DATABASE: slim
-            DB_USERNAME: slim
-            DB_PASSWORD: slim
+            DB_DRIVER: ${DB_DRIVER}
+            DB_HOST: ${DB_HOST}
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+            JWT_SECRET: ${JWT_SECRET}
         ports:
             - "8080:8080"
         volumes:

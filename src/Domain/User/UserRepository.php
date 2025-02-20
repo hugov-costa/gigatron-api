@@ -24,6 +24,13 @@ interface UserRepository
     public function findAll(): array;
 
     /**
+     * @param string $email
+     * @return User
+     * @throws UserNotFoundException
+     */
+    public function findUserOfEmail(string $email): User;
+
+    /**
      * @param int $id
      * @return User
      * @throws UserNotFoundException
